@@ -1,1 +1,70 @@
-#include<stdio.h> #include<stdlib.h> #include<time.h> float **Alocarea_dinamica (int x,int y); void Introducerea_elementelor(float **P,int x,int y); void Completarea_aleatorie(float **P,int x,int y); void Sortare_elementelor(float **P,int x,int y); void Afisarea_tabloului(float **P, int x, int y); void Eliberarea_memorie(float **p, int x); int main(void) { int x,y,a,i; float **P; printf("Dati numarul de linii si coloane a tabloului bidimensional: "); scanf ("%d %d", &x, &y); while(1) { printf("\n1.Alocarea dinamica a memoriei pentru tablou bidimensional.\n"); printf("2.Introducerea elementelor tabloului.\n"); printf("3.Completarea tabloului cu elemente aleatorii.\n"); printf("4.Sortarea elementelor tabloului.\n"); printf("5.Afisarea elementelor tabloului la ecran.\n"); printf("6.Eliberarea memoriei alocate pentru tablou.\n"); printf("0.Iesire din program.\n"); scanf("%d",&a); switch (a) { case 1: P = Alocarea_dinamica (x, y); break; case 2: Introducerea_elementelor(P, x, y); break; case 3: Completarea_aleatorie(P, x, y); printf("\nProcedura de completare cu elemente aleatorii a fost efectuata\n\n");       break; case 4: Sortare_elementelor(P, x, y); break; case 5: Afisarea_tabloului(P, x, y); break; case 6: Eliberarea_memoriei(P,x); P=NULL; printf("\nProcedura de eliberare a memoriei a fost efectuata\n\n"); break; case 0: printf("\nIesire din program\n"); return 0; default : printf("Numărul nu se regaseste in lista\n\n"); } } return 0; } float** Alocarea_dinamica (int x,int y) { int i; float **P; P=(float**)malloc(x*sizeof(float*)); for(i=0; i<x; i++) { P[i]=(float*)malloc(y*sizeof(float)); } if (P==NULL) { printf("Procedura de alocare a memoriei nu a avut loc\n\n"); } else { printf("Procedura de alocare a memoriei a avut loc \n\n"); } return P;       } void Introducerea_elementelor(float **P,int x,int y) { int i,j; for(i=0; i<x; i++) { for(j=0; j<y; j++) { printf("P[%d][%d]=",i,j); scanf("%f",&P[i][j]); } } } void Completarea_aleatorie(float **P, int x,int y) { srand(time(NULL)); int i,j; for(i=0; i<x; i++) { for(j=0; j<y; j++) { P[i][j]=rand() % 100-rand()%100; } } printf("\n Matricea obtinuta este :\n"); for (i=0; i<x; i++) { for (j=0; j<y; j++) { printf("%f\t", P[i][j]); } } printf("\n"); } void Sortare_elementelor (float **P,int x,int y) { int i,j,c,t; for (i=0; i<x-1; i++){ for (c=0; c<y; c++){       for (j=0; j<y-1; j++){ do { t = P[c][j]; P[c][j] = P[c][j+1]; P[c][j+1] = t; } while (P[c][j]>P[c][j+1]); } } } printf("\nOperatiunea de sortare a tabloului a avut loc \n"); } void Afisarea_tabloului(float **P, int x, int y) { int i,j; printf("\nForma tabloului este :\n\n"); for(i=0; i<x; i++) { for(j=0; j<y; j++) { printf("%.f\t",P[i][j]); } printf("\n"); } } void Eliberarea_memoriei(float **P,int x) { int i; for (i=0; i<x; i++) free(P[i]); free(P); return; }
+#include<stdio.h> 
+#include<stdlib.h>
+ #include<time.h> 
+float **Alocarea_dinamica (int x,int y); 
+void Introducerea_elementelor(float **P,int x,int y); 
+void Completarea_aleatorie(float **P,int x,int y); 
+void Sortare_elementelor(float **P,int x,int y); 
+void Afisarea_tabloului(float **P, int x, int y); 
+void Eliberarea_memorie(float **p, int x); 
+int main(void) 
+{ 
+int x,y,a,i; 
+float **P; 
+printf("Dati numarul de linii si coloane a tabloului bidimensional: ");
+ scanf ("%d %d", &x, &y); 
+while(1) 
+{ 
+printf("\n1.Alocarea dinamica a memoriei pentru tablou bidimensional.\n");
+ printf("2.Introducerea elementelor tabloului.\n"); 
+printf("3.Completarea tabloului cu elemente aleatorii.\n"); 
+printf("4.Sortarea elementelor tabloului.\n");
+ printf("5.Afisarea elementelor tabloului la ecran.\n");
+ printf("6.Eliberarea memoriei alocate pentru tablou.\n"); 
+printf("0.Iesire din program.\n"); 
+scanf("%d",&a); 
+switch (a)
+ { 
+case 1: P = Alocarea_dinamica (x, y); 
+break; 
+case 2: Introducerea_elementelor(P, x, y);
+ break; 
+case 3: Completarea_aleatorie(P, x, y);
+ printf("\nProcedura de completare cu elemente aleatorii a fost efectuata\n\n");   
+break; 
+case 4: Sortare_elementelor(P, x, y); 
+break; 
+case 5: Afisarea_tabloului(P, x, y); 
+break; 
+case 6: Eliberarea_memoriei(P,x);
+ P=NULL;
+ printf("\nProcedura de eliberare a memoriei a fost efectuata\n\n"); 
+break;
+ case 0: printf("\nIesire din program\n");
+ return 0; 
+default : printf("Numărul nu se regaseste in lista\n\n"); 
+} 
+} 
+return 0;
+ } 
+float** Alocarea_dinamica (int x,int y) { int i; float **P; P=(float**)malloc(x*sizeof(float*));
+ for(i=0; i<x; i++) { P[i]=(float*)malloc(y*sizeof(float)); } 
+if (P==NULL) { printf("Procedura de alocare a memoriei nu a avut loc\n\n"); } else { printf("Procedura de alocare a memoriei a avut loc \n\n"); } 
+return P;      
+ } 
+void Introducerea_elementelor(float **P,int x,int y) { int i,j; for(i=0; i<x; i++)
+ { for(j=0; j<y; j++) { printf("P[%d][%d]=",i,j); scanf("%f",&P[i][j]); } } } 
+void Completarea_aleatorie(float **P, int x,int y) { srand(time(NULL)); int i,j; for(i=0; i<x; i++) { for(j=0; j<y; j++) { P[i][j]=rand() % 100-rand()%100; } } 
+printf("\n Matricea obtinuta este :\n");
+ for (i=0; i<x; i++) { for (j=0; j<y; j++) { printf("%f\t", P[i][j]); } } printf("\n"); } 
+void Sortare_elementelor (float **P,int x,int y) { int i,j,c,t; for (i=0; i<x-1; i++){ for (c=0; c<y; c++){       for (j=0; j<y-1; j++){ do { t = P[c][j]; P[c][j] = P[c][j+1]; P[c][j+1] = t; }
+ while (P[c][j]>P[c][j+1]); } } }
+ printf("\nOperatiunea de sortare a tabloului a avut loc \n"); }
+ void Afisarea_tabloului(float **P, int x, int y) { int i,j; printf("\nForma tabloului este :\n\n"); for(i=0; i<x; i++) { for(j=0; j<y; j++) 
+{
+ printf("%.f\t",P[i][j]); } printf("\n"); } } 
+void Eliberarea_memoriei(float **P,int x) { int i; for (i=0; i<x; i++) 
+free(P[i]); 
+free(P); 
+return;
+ }
